@@ -1,0 +1,137 @@
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+div.picture {
+    position: relative;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    width: 666px;
+    background-image: url(../img/4-jezioro.jpg);
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 366px;
+}
+
+p {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+}
+
+/*---------Pseudoelementy------------*/
+
+div.picture::before,
+div.picture::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+}
+
+div.picture::before {
+    top: 0;
+}
+
+div.picture::after {
+    bottom: 0;
+}
+
+p::before {
+    content: 'lake view';
+    position: absolute;
+    top: 50%;
+    left: 0; 
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    font-size: 60px;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-transform: uppercase;
+    opacity: 0;
+}
+
+/*---------Animacje pseudoelementow------------*/
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.15;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes border-top {
+    15% {
+        border-top: 3px solid black;
+    }
+    100% {
+        border-top: 3px solid black;
+    }
+}
+
+@keyframes border-bottom {
+    15% {
+        border-bottom: 3px solid black;
+    }
+    100% {
+        border-bottom: 3px solid black;
+    }
+}
+
+@keyframes border-left-right {
+    15% {
+        height: 5%;
+    }
+    50% {
+        border-left: 3px solid black;
+        border-right: 3px solid black;
+    }
+    100% {
+        border-left: 3px solid black;
+        border-right: 3px solid black;
+        height: 50%;
+    }
+}
+
+/*---------Wywołanie animacji na hover------------*/
+
+p:hover::before{
+    animation: show 2s linear forwards;
+}
+
+div.picture:hover::before {
+    animation: border-top 2s ease-in-out forwards,
+    border-left-right 2s ease-in-out forwards,
+    show 2s ease-in-out forwards;
+}
+
+div.picture:hover::after {
+    animation: border-bottom 2s ease-in-out forwards,
+    border-left-right 2s ease-in-out forwards,
+    show 2s ease-in-out forwards;
+}
